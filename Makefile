@@ -1,5 +1,5 @@
 start: main
-	./main $(name) $(mode)
+	./main $(name) $(mode) $(it)
 
 main: main.o 
 	g++ main.o -o main

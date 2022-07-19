@@ -25,34 +25,39 @@ class saService {
         // };
     public:
     
-        bool factible(vector<InstanciaService::Nodo>&solucion, InstanciaService::restriccionesInstancia restricciones){
+        bool factible(vector<InstanciaService::Nodo>&solucion, InstanciaService::restriccionesInstancia restricciones,
+        float& combustRemanente_){
             bool solValida = false;
             parametrosService pService;
             float v = restricciones.speed;
             float distAcumulada = 0;
             float tiempoAcumulado = 0;
-            float combustibleRemanente = restricciones.maxDistance;
+            float CombustibleRemanente = restricciones.maxDistance;
             int n = solucion.size()-1;
 
             for(int i=0;i<n;i++){
                     distAcumulada += pService.distanciaViaje(solucion[i],solucion[i+1]);
-                    combustibleRemanente -= pService.distanciaViaje(solucion[i],solucion[i+1]);
+                    CombustibleRemanente -= pService.distanciaViaje(solucion[i],solucion[i+1]);
                 if(solucion[i+1].tipo.compare("c")==0){
                     tiempoAcumulado += pService.tiempoViaje(solucion[i],solucion[i+1],v) + restricciones.serviceTime;
                 }else if(solucion[i+1].tipo.compare("f")==0){
                     tiempoAcumulado += pService.tiempoViaje(solucion[i],solucion[i+1],v) + restricciones.refuelTime;
-                    combustibleRemanente = restricciones.maxDistance;
+                    CombustibleRemanente = restricciones.maxDistance;
                 }else{//depósito final
                     tiempoAcumulado += pService.tiempoViaje(solucion[i],solucion[i+1],v);
                 }
             }
             
-            if(tiempoAcumulado<=restricciones.maxTime && combustibleRemanente>=0){// || restricciones.maxDistance<distAcumulada)
+            if(tiempoAcumulado<=restricciones.maxTime && CombustibleRemanente>=0){// || restricciones.maxDistance<distAcumulada)
                 solValida=true;
             }else{
                 solValida=false;
             }
 
+            cout<<"tiempoAcumulado "<<tiempoAcumulado<<endl;
+            cout<<"Tiempo max "<<restricciones.maxTime<<endl;
+            cout<<"Combustible Remanente"<< CombustibleRemanente<<endl;
+            combustRemanente_ = CombustibleRemanente;
             //Si todos los nodos componentes son tipo f => sol no factible 
             //(Esto es por el tipo de greedy que estoy haciendo. En este greedy se buscan solo los clientes alcanzables
             // y solo se agregan FS cuando existan restricciones de combustible. Por eso, para este greedy en particular
@@ -264,7 +269,7 @@ class saService {
             int n = Sc.size()-2;
             int pos1 = randInt(1,n);
             int pos2 = randInt(1,n);
-            while(pos1 == pos2){
+            while(pos1 == pos2  || abs(pos1-pos2)<3){
                 pos1 = randInt(1,n);
                 pos2 = randInt(1,n);
             }
@@ -277,13 +282,22 @@ class saService {
             newSc[pos1] = newSc[pos2];
             newSc[pos2] = nodoAux;
             //Generar lista reversa entre ambos nodos
-            if(abs(pos1-pos2)<3){
-                //Equivalente a swap
-                return newSc;
-            }else{
-                newSc = reverse(newSc,pos1,pos2);
-            }
+            // if(abs(pos1-pos2)<3){
+            //     //Equivalente a swap
+            //     cout<<"Me colé igual"<<endl;
+            //     return newSc;
+            // }else{
+            //     newSc = reverse(newSc,pos1,pos2);
+            // }
+            newSc = reverse(newSc,pos1,pos2);
             Sc = newSc;
+            ///////////
+            // cout<<"[";
+            // for(InstanciaService::Nodo n:newSc){
+            //     cout<<n.tipo << n.id <<" - ("<< n.latitud << " , "<< n.longitud <<")"<<endl;
+            // }
+            // cout<<"]";
+            /////////////
             return newSc;
         }
 
@@ -295,7 +309,7 @@ class saService {
         */
         vector<InstanciaService::Nodo> simulatedAnnealing(float T, float alfa, vector<InstanciaService::Nodo> Sc_,
         vector<InstanciaService::Nodo>& listaClientes, InstanciaService::restriccionesInstancia restricciones,
-        float& distanciaSolucion, float& tiempoSolucion, string mode){
+        float& distanciaSolucion, float& tiempoSolucion,float& combustibleRemanente, string mode){
 
             parametrosService pService;
             vector<InstanciaService::Nodo>Sc = Sc_;
@@ -307,28 +321,26 @@ class saService {
             Sbest = Sc;
             bool solValida = false;
 
+            //float borrar = 0;
             while(T > T_termino){
+
                 // while(!solValida){
                 //     if(mode.compare("SAS")==0){
                 //         Sn = swapNodos(Sc);
                 //     }else if(mode.compare("SAO")==0){
                 //         Sn = twoOPT(Sc);
                 //     }
-                //     solValida = factible(Sn,restricciones);
+                //     solValida = factible(Sn,restricciones,borrar);
                 //     cout<<"solValida "<<solValida<<endl;
                 // }
 
                 ////////////////SA acepta sol infactibles///////////
-                
                 if(mode.compare("SAS")==0){
                     Sn = swapNodos(Sc);
                 }else if(mode.compare("SAO")==0){
                     Sn = twoOPT(Sc);
                 }
-                solValida = factible(Sn,restricciones);
-                cout<<"solValida "<<solValida<<endl;
-                
-                ////////////////
+                /////////////////////////////
                 
                 distSn = distanciaTotalRecorrida(Sn);
                 distSc = distanciaTotalRecorrida(Sc);
@@ -353,6 +365,15 @@ class saService {
             tiempoSolucion = tiempoTotalRecorrido(Sbest,restricciones);//tiempo de Sbest 
             distanciaSolucion = distSbest;
             listaClientes = pService.setClientesVisitables(Sbest,listaClientes);
+
+            solValida = factible(Sbest,restricciones,combustibleRemanente);
+            cout<<"****factible?"<<solValida<<endl;
+            cout<<"****tiempoAcumulado "<<tiempoSolucion<<endl;
+            cout<<"****Tiempo max "<<restricciones.maxTime<<endl;
+            cout<<"****Combustible Remanente"<< combustibleRemanente<<endl;
+            cout<<"solValida "<<solValida<<endl;
+            cout<<"============================"<<endl;
+            
             return Sbest;
         }
 

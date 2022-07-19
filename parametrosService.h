@@ -208,41 +208,41 @@ class parametrosService{
         greedy2
         Busca el nodo más cercano (independiente del tipo) => Genera soluciones iniciales más heterogeneas
         */
-        void greedy2(vector<InstanciaService::Nodo>& solucion, InstanciaService::Nodo deposito,
-        vector<InstanciaService::Nodo>& listaClientes, vector<InstanciaService::Nodo>& listaEstaciones,
-        InstanciaService::restriccionesInstancia restricciones,float& tiempoSol, float& distSol){
+        // void greedy2(vector<InstanciaService::Nodo>& solucion, InstanciaService::Nodo deposito,
+        // vector<InstanciaService::Nodo>& listaClientes, vector<InstanciaService::Nodo>& listaEstaciones,
+        // InstanciaService::restriccionesInstancia restricciones,float& tiempoSol, float& distSol){
             
-            InstanciaService::Nodo nodoAnterior;
-            InstanciaService::Nodo nodoActual;
-            InstanciaService::Nodo nodoNuevo;
-            InstanciaService::Nodo nodoNuevoRecarga;
-            float distMax = restricciones.maxDistance;
-            float timeMax = restricciones.maxTime;
-            float const v = restricciones.speed;
-            bool flag = true;
-            float dc = 0; float tc = 0; float df = 0; float tf = 0;
-            vector<InstanciaService::Nodo>empty;
-            solucion = empty;
-            nodoAnterior.id=-1; nodoAnterior.tipo="none";
-            nodoActual = deposito;//Vehículo comienza en el depósito
-            solucion.push_back(deposito);
+        //     InstanciaService::Nodo nodoAnterior;
+        //     InstanciaService::Nodo nodoActual;
+        //     InstanciaService::Nodo nodoNuevo;
+        //     InstanciaService::Nodo nodoNuevoRecarga;
+        //     float distMax = restricciones.maxDistance;
+        //     float timeMax = restricciones.maxTime;
+        //     float const v = restricciones.speed;
+        //     bool flag = true;
+        //     float dc = 0; float tc = 0; float df = 0; float tf = 0;
+        //     vector<InstanciaService::Nodo>empty;
+        //     solucion = empty;
+        //     nodoAnterior.id=-1; nodoAnterior.tipo="none";
+        //     nodoActual = deposito;//Vehículo comienza en el depósito
+        //     solucion.push_back(deposito);
 
-            float dMinC = 0;
-            float dMinF = 0;
-            InstanciaService::Nodo nodoAuxC;
-            InstanciaService::Nodo nodoAuxF;
-            while(flag){
-                nodoAuxC = nodoMasCercano(listaClientes,nodoActual);
-                nodoAuxF = nodoMasCercano(listaEstaciones,nodoActual);
-                dMinC = distanciaViaje(nodoActual,nodoAuxC);
-                dMinF = distanciaViaje(nodoActual,nodoAuxF);
-                if(dMinC <= dMinF){
-                    nodoNuevo = nodoAuxC;
-                }else{
-                    nodoNuevo = nodoAuxF;
-                }
-            } 
-        }
+        //     float dMinC = 0;
+        //     float dMinF = 0;
+        //     InstanciaService::Nodo nodoAuxC;
+        //     InstanciaService::Nodo nodoAuxF;
+        //     while(flag){
+        //         nodoAuxC = nodoMasCercano(listaClientes,nodoActual);
+        //         nodoAuxF = nodoMasCercano(listaEstaciones,nodoActual);
+        //         dMinC = distanciaViaje(nodoActual,nodoAuxC);
+        //         dMinF = distanciaViaje(nodoActual,nodoAuxF);
+        //         if(dMinC <= dMinF){
+        //             nodoNuevo = nodoAuxC;
+        //         }else{
+        //             nodoNuevo = nodoAuxF;
+        //         }
+        //     } 
+        // }
 };
 
 #endif
