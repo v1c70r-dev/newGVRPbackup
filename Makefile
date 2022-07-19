@@ -29,9 +29,9 @@ cleanSAS:
 	rm *.o outSAS/*.out
 
 cleanSAO:
-	rm *.o outSA3OPT/*.out
+	rm *.o outSAOPT/*.out
 
 cleanAll:
-	rm *.o outSAS/*.out outGreedy/*.out outSA3OPT/*.out
+	rm *.o outSAS/*.out outGreedy/*.out outSAOPT/*.out
 #target:dependencies
 #	actions

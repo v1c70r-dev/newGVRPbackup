@@ -13,6 +13,16 @@
 using namespace std;
 
 class saService {
+
+    private:
+        // struct nodosArco{//Guarda pares de nodos, ej arco d0-c1
+        //     InstanciaService::Nodo nodo0; //do
+        //     InstanciaService::Nodo nodo1; //c1
+        //     int marcaNodo0 = 0; //0 no marcado, 1 marcado
+        //     int marcaNodo1 = 0;
+        //     int nuevaPosNodo0 = -1;
+        //     int nuevaPosNodo1 = -1;
+        // };
     public:
     
         bool factible(vector<InstanciaService::Nodo>&solucion, InstanciaService::restriccionesInstancia restricciones){
@@ -145,6 +155,99 @@ class saService {
             //aux = Sn_;
             return aux;
         }
+        /*
+        Función: Revisa si todos los nodos de la lista conjuntoArcCorte están marcados
+        Retorna: true cuando están todos marcados, false caso contrario
+        */
+        // bool todosMarcados(vector<nodosArco> conjuntoArcCorte){
+        //     bool allMarcados = true;
+        //     for(nodosArco na:conjuntoArcCorte){
+        //         if(na.marcaNodo0 == 0 || na.marcaNodo1 == 0){
+        //             allMarcados = false;
+        //         } 
+        //     }
+        //     //cout<<"allMarcados: "<<allMarcados<<endl;
+        //     return allMarcados;
+        // }
+
+        // bool adyacentes(int cut0, int cut1, int cut2, vector<nodosArco> conjuntoArcs){
+        //     bool sonAdyacentes = false;
+        //     nodosArco arco0 = conjuntoArcs[cut0];
+        //     nodosArco arco1 = conjuntoArcs[cut1];
+        //     nodosArco arco2 = conjuntoArcs[cut2];
+        //     if((arco0.nodo0.id == arco1.nodo0.id && arco0.nodo0.tipo == arco1.nodo0.tipo) 
+        //     || (arco0.nodo0.id == arco1.nodo1.id && arco0.nodo0.tipo == arco1.nodo1.tipo)){
+        //         sonAdyacentes = true;
+        //     }else if((arco0.nodo1.id == arco1.nodo0.id && arco0.nodo1.tipo == arco1.nodo0.tipo) 
+        //     || (arco0.nodo1.id == arco1.nodo1.id && arco0.nodo1.tipo == arco1.nodo1.tipo)){
+        //         sonAdyacentes = true;
+        //     }else if((arco1.nodo0.id == arco2.nodo0.id && arco1.nodo0.tipo == arco2.nodo0.tipo) 
+        //     || (arco1.nodo0.id == arco2.nodo1.id && arco1.nodo0.tipo == arco2.nodo1.tipo)){
+        //         sonAdyacentes = true;
+        //     }else if((arco1.nodo1.id == arco2.nodo0.id && arco1.nodo1.tipo == arco2.nodo0.tipo) 
+        //     || (arco1.nodo1.id == arco2.nodo1.id && arco1.nodo1.tipo == arco2.nodo1.tipo)){
+        //         sonAdyacentes = true;
+        //     }else if((arco0.nodo0.id == arco2.nodo0.id && arco0.nodo0.tipo == arco2.nodo0.tipo) 
+        //     || (arco0.nodo0.id == arco2.nodo1.id && arco0.nodo0.tipo == arco2.nodo1.tipo)){
+        //         sonAdyacentes = true;
+        //     }else if((arco0.nodo1.id == arco2.nodo0.id && arco0.nodo1.tipo == arco2.nodo0.tipo) 
+        //     || (arco0.nodo1.id == arco2.nodo1.id && arco0.nodo1.tipo == arco2.nodo1.tipo)){
+        //         sonAdyacentes = true;
+        //     }
+        //     return sonAdyacentes;
+        // }
+
+        // bool arcoYaExistente(vector<nodosArco> conjuntoArcs,vector<nodosArco> conjuntoNuevosArcs){
+        //     bool yaExiste = false;
+        //     for(nodosArco newArcs: conjuntoNuevosArcs){
+        //         for(nodosArco Arcs: conjuntoArcs){
+        //             if((newArcs.nodo0.id==Arcs.nodo0.id && newArcs.nodo0.tipo==Arcs.nodo0.tipo) 
+        //             ||(newArcs.nodo0.id==Arcs.nodo1.id && newArcs.nodo0.tipo==Arcs.nodo1.tipo)){
+        //                 if((newArcs.nodo1.id==Arcs.nodo0.id && newArcs.nodo1.tipo==Arcs.nodo0.tipo) 
+        //                 ||(newArcs.nodo1.id==Arcs.nodo1.id && newArcs.nodo1.tipo==Arcs.nodo1.tipo)){
+        //                     yaExiste = true;
+        //                     break;
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     return yaExiste;
+        // }
+
+        // void showConjuntoArcos(vector<nodosArco> conjArcs){
+        //     cout<<"\nConjunto Arcos "<<endl;
+        //     for(nodosArco na:conjArcs){
+        //         cout<<"["<<na.nodo0.tipo<<""<<na.nodo0.id<<"--"<<na.nodo1.tipo<<""<<na.nodo1.id<<"]"<<endl;
+        //         cout<<"nuevaPosNodo0 "<<na.nuevaPosNodo0 <<endl;
+        //         cout<<"nuevaPosNodo1 "<<na.nuevaPosNodo1 <<endl;
+        //     }
+        // }
+
+
+        vector<InstanciaService::Nodo> reverse(vector<InstanciaService::Nodo>& lista,int position1, int position2){
+            vector<InstanciaService::Nodo>aux;
+            int j = 0; int k = 0;
+            if(position1>position2){
+                j = position1;
+                k = position2;
+            }else{
+                j = position2;
+                k = position1;
+            }
+
+            for(int i = j-1; i>k; i--){
+                aux.push_back(lista[i]);
+            }
+
+            int c = 0;
+            for(int i = 0; i < lista.size(); i++){
+                if(i>k && i<j){
+                    lista[i] = aux[c];
+                    c++;
+                }
+            }
+            return lista;
+        }
 
         /*
         * threeOPT()
@@ -154,18 +257,34 @@ class saService {
         * Función: 
         * Retorna: 
         */
-        vector<InstanciaService::Nodo> threeOPT(vector<InstanciaService::Nodo> Sc, int nMaxIteraciones){
-            vector<InstanciaService::Nodo>aux;
-            /*
-                Elegir 3 arcos al azar
-                Elegir al azar una de las posibles uniones:
-                    Al cortar los 3 arcos siempre se generan 6 cabezas de posible unión => 3 uniones
-                    Elegir el orden de unión al azar
-                Reescribir la solución 
-                    
-
-            */
-            return aux;
+        vector<InstanciaService::Nodo>twoOPT(vector<InstanciaService::Nodo>& Sc){
+            vector<InstanciaService::Nodo>newSc;
+            InstanciaService::Nodo nodoAux; 
+            //Elegir 2 nodos que no sean d0
+            int n = Sc.size()-2;
+            int pos1 = randInt(1,n);
+            int pos2 = randInt(1,n);
+            while(pos1 == pos2){
+                pos1 = randInt(1,n);
+                pos2 = randInt(1,n);
+            }
+            //Copiar Sc en aux
+            for(InstanciaService::Nodo n:Sc){
+                newSc.push_back(n);
+            }
+            //Swap entre ambos nodos
+            nodoAux = newSc[pos1];
+            newSc[pos1] = newSc[pos2];
+            newSc[pos2] = nodoAux;
+            //Generar lista reversa entre ambos nodos
+            if(abs(pos1-pos2)<3){
+                //Equivalente a swap
+                return newSc;
+            }else{
+                newSc = reverse(newSc,pos1,pos2);
+            }
+            Sc = newSc;
+            return newSc;
         }
 
         /*
@@ -189,14 +308,27 @@ class saService {
             bool solValida = false;
 
             while(T > T_termino){
-                while(!solValida){
-                    if(mode.compare("SAS")==0){
-                        Sn = swapNodos(Sc);
-                    }else if(mode.compare("SAO")==0){
-                        //Sn = threeOPT(Sc);
-                    }
-                    solValida = factible(Sn,restricciones);
+                // while(!solValida){
+                //     if(mode.compare("SAS")==0){
+                //         Sn = swapNodos(Sc);
+                //     }else if(mode.compare("SAO")==0){
+                //         Sn = twoOPT(Sc);
+                //     }
+                //     solValida = factible(Sn,restricciones);
+                //     cout<<"solValida "<<solValida<<endl;
+                // }
+
+                ////////////////SA acepta sol infactibles///////////
+                
+                if(mode.compare("SAS")==0){
+                    Sn = swapNodos(Sc);
+                }else if(mode.compare("SAO")==0){
+                    Sn = twoOPT(Sc);
                 }
+                solValida = factible(Sn,restricciones);
+                cout<<"solValida "<<solValida<<endl;
+                
+                ////////////////
                 
                 distSn = distanciaTotalRecorrida(Sn);
                 distSc = distanciaTotalRecorrida(Sc);

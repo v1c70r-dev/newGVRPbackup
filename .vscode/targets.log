@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Jul 17 20:16:58 2022
+# Make data base, printed on Mon Jul 18 21:10:56 2022
 
 # Variables
 
@@ -49,13 +49,13 @@ VSCODE_CWD = /mnt/c/Users/vic_m/AppData/Local/Programs/Microsoft VS Code
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/tux/.vscode-server/bin/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a/bin/remote-cli:/home/tux/.local/bin:/home/tux/.nvm/versions/node/v16.14.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Users/vic_m/AppData/Local/Programs/Python/Python38/:/mnt/c/Users/vic_m/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/vic_m/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Program Files/JetBrains/IntelliJ IDEA Community Edition 2021.3.1/bin:/mnt/c/Users/vic_m/AppData/Local/GitHubDesktop/bin:/snap/bin:/home/tux/.dotnet/tools
+PATH = /home/tux/.vscode-server/bin/3b889b090b5ad5793f524b5d1d39fda662b96a2a/bin/remote-cli:/home/tux/.local/bin:/home/tux/.nvm/versions/node/v16.14.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Users/vic_m/AppData/Local/Programs/Python/Python38/:/mnt/c/Users/vic_m/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/vic_m/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Program Files/JetBrains/IntelliJ IDEA Community Edition 2021.3.1/bin:/mnt/c/Users/vic_m/AppData/Local/GitHubDesktop/bin:/snap/bin:/home/tux/.dotnet/tools
 # environment
 NVM_BIN = /home/tux/.nvm/versions/node/v16.14.0/bin
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-810528c1-f78a-4f48-83a5-ec9829fa137e.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-266b7a0b-3728-4804-8ad3-2c4376e7555e.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -67,9 +67,9 @@ PWD = /home/tux/newGVRPbackup
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/153_interop
+WSL_INTEROP = /run/WSL/152_interop
 # environment
-WT_SESSION = 8898c33e-e3e2-4976-95fc-5a36c98a8f8b
+WT_SESSION = 3357c7f4-d388-4ede-a5c6-3595d26b1170
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -161,9 +161,9 @@ MOTD_SHOWN = update-motd
 
 # Directories
 
-# . (device 2096, inode 951117): 27 files, no impossibilities.
+# . (device 2096, inode 951117): 22 files, no impossibilities.
 
-# 27 files, no impossibilities in 1 directories.
+# 22 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -208,13 +208,14 @@ cleanSAS:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+ 
 #  recipe to execute (from 'Makefile', line 29):
 	rm *.o outSAS/*.out
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-17 20:16:19.299715487
+#  Last modified 2022-07-18 21:09:40.366828312
 #  File has been updated.
 #  Successfully updated.
 
@@ -268,7 +269,7 @@ cleanSAO:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 32):
-	rm *.o outSA3OPT/*.out
+	rm *.o outSAOPT/*.out
 
 clean:
 #  Implicit rule search has not been done.
@@ -277,7 +278,6 @@ clean:
 #  recipe to execute (from 'Makefile', line 23):
 	rm *.o 
 
- 
 outputService: outputService.o instanciaService parametrosService
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -316,7 +316,7 @@ cleanAll:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 35):
-	rm *.o outSAS/*.out outGreedy/*.out outSA3OPT/*.out
+	rm *.o outSAS/*.out outGreedy/*.out outSAOPT/*.out
 
 # files hash-table stats:
 # Load=23/1024=2%, Rehash=0, Collisions=0/57=0%
@@ -326,12 +326,12 @@ cleanAll:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 42 / storage = 491 B / avg = 11 B
-# current buf: size = 8162 B / used = 491 B / count = 42 / avg = 11 B
+# strcache buffers: 1 (0) / strings = 42 / storage = 490 B / avg = 11 B
+# current buf: size = 8162 B / used = 490 B / count = 42 / avg = 11 B
 
-# strcache performance: lookups = 78 / hit rate = 46%
+# strcache performance: lookups = 73 / hit rate = 42%
 # hash-table stats:
-# Load=42/8192=1%, Rehash=0, Collisions=1/78=1%
-# Finished Make data base on Sun Jul 17 20:16:58 2022
+# Load=42/8192=1%, Rehash=0, Collisions=1/73=1%
+# Finished Make data base on Mon Jul 18 21:10:56 2022
 
  

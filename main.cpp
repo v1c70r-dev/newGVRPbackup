@@ -53,8 +53,8 @@ int main(int argc, char** argv){
     //////////////////////////////////////////////////////////
 
     ///////////// Variables y estructuras SA ////////////////
-    float temperatura_ = 100;
-    float alfa_ = 0.8;
+    float temperatura_ = 50;
+    float alfa_ = 0.9;
     bool flagSAO = false;
     /////////////////////////////////////////////////////////
 
@@ -89,7 +89,6 @@ int main(int argc, char** argv){
             flag = sService.factible(solucion_,restricciones_);
             if(flag){
                 solucion_ = sService.simulatedAnnealing(temperatura_,alfa_, solucion_,listaClientes_, restricciones_, distSol_, tiempoSol_, mode_);
-                //flagSA = sService.factible(solucion_,restricciones_);
                 //SA solo retorna soluciones válidas, por lo que se agregan al archivo
                 conjuntoSoluciones_.push_back(solucion_);
                 dataSolucion_.combustibleRemanente = combustibleRemanente_;
@@ -107,17 +106,18 @@ int main(int argc, char** argv){
             solucion_ = pService.greedy1(solucion_, deposito_, listaClientes_,listaEstaciones_,restricciones_,tiempoSol_, distSol_,combustibleRemanente_);
             flag = sService.factible(solucion_,restricciones_);
             if(flag){
-                //solucion_ = sService.threeOPT();
-                flagSAO = sService.factible(solucion_,restricciones_);
-                if(flagSAO){
-                    conjuntoSoluciones_.push_back(solucion_);
-                    dataSolucion_.combustibleRemanente = combustibleRemanente_;
-                    dataSolucion_.distanciaRecorrida = distSol_;
-                    dataSolucion_.tiempoUsado = tiempoSol_;
-                    conjuntoDataSoluciones_.push_back(dataSolucion_); 
-                }
+                solucion_ = sService.simulatedAnnealing(temperatura_,alfa_, solucion_,listaClientes_, restricciones_, distSol_, tiempoSol_, mode_);
+                //SA solo retorna soluciones válidas, por lo que se agregan al archivo
+                conjuntoSoluciones_.push_back(solucion_);
+                dataSolucion_.combustibleRemanente = combustibleRemanente_;
+                dataSolucion_.distanciaRecorrida = distSol_;
+                dataSolucion_.tiempoUsado = tiempoSol_;
+                conjuntoDataSoluciones_.push_back(dataSolucion_); 
             }
         }
+        t1exe = clock();
+        tiempoEjecucion_ = (double(t1exe-t0exe)/CLOCKS_PER_SEC);
+        oService.escribirArchivo(name, conjuntoSoluciones_, conjuntoDataSoluciones_, tiempoEjecucion_, restricciones_.maxDistance, mode_);
     }else{
         cout<<"Error! Valores válidos para mode: G, SAS, SAO"<<endl;
     }

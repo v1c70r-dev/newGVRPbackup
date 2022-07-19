@@ -129,7 +129,7 @@ class OutputService{
             }else if(mode.compare("SAS")==0){
                 file.open("outSAS/"+nameFile+".out",ios::out);
             }else if(mode.compare("SAO")==0){
-                file.open("outSAO/"+nameFile+".out",ios::out);
+                file.open("outSAOPT/"+nameFile+".out",ios::out);
             }
             //Calidad de la solución [millas] #Clientes atendidos #Vehiculos Tiempo de ejecución [s]
             file << solQuality+"       "+nCliServed+"       "+nCars+"       "+exeTime+" \n";
