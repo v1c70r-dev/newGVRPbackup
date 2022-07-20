@@ -81,16 +81,16 @@ class OutputService{
             string data = "";
             string ruta = "";
 
-            /////////////
-            float combExcedido = combRemanente;
-            /////////////
+            ///////////// Borrar ////////
+            // float combExcedido = combRemanente;
+            /////////////////////////////
 
-            // float combExcedido = 0;
-            // if(combMax-combRemanente<0){
-            //    combExcedido = -1*(combMax-combRemanente); 
-            // }else{
-            //     combExcedido = 0;
-            // }
+            float combExcedido = 0;
+            if(combMax-combRemanente<0){
+               combExcedido = -1*(combMax-combRemanente); 
+            }else{
+                combExcedido = 0;
+            }
 
             for(InstanciaService::Nodo nodo:solucion){
                 ruta += nodo.tipo + to_string(nodo.id) + " "; 
@@ -106,7 +106,7 @@ class OutputService{
         * Retorno:  
         */
         void escribirArchivo(string nameFile,vector<vector<InstanciaService::Nodo>> conjuntoSoluciones,
-        vector<dataSol> conjuntoDataSoluciones, double tiempoEjecucion, float distMax, string mode, string it){
+        vector<dataSol> conjuntoDataSoluciones, double tiempoEjecucion, float distMax, string mode){
         
             float distanciaTotal = 0;
             int nClientesTotal = 0;
@@ -121,6 +121,9 @@ class OutputService{
                 distanciaTotal += ds.distanciaRecorrida;
                 data = fun(conjuntoSoluciones[i], ds.distanciaRecorrida, ds.tiempoUsado, ds.combustibleRemanente, distMax);
                 dataToFile.push_back(data);
+
+
+                //cout<<ds.combustibleRemanente<<"  "<<ds.distanciaRecorrida<<"  "<<ds.tiempoUsado<<endl;
             }
 
             string solQuality = to_string(distanciaTotal);
@@ -130,11 +133,11 @@ class OutputService{
 
             ofstream file;
             if(mode.compare("G")==0){
-                file.open("outGreedy/"+nameFile+it+".out",ios::out);        
+                file.open("outGreedy/"+nameFile+".out",ios::out);        
             }else if(mode.compare("SAS")==0){
-                file.open("outSAS/"+nameFile+it+".out",ios::out);
+                file.open("outSAS/"+nameFile+".out",ios::out);
             }else if(mode.compare("SAO")==0){
-                file.open("outSAOPT/"+nameFile+it+".out",ios::out);
+                file.open("outSAOPT/"+nameFile+".out",ios::out);
             }
             //Calidad de la solución [millas] #Clientes atendidos #Vehiculos Tiempo de ejecución [s]
             file << solQuality+"       "+nCliServed+"       "+nCars+"       "+exeTime+" \n";

@@ -14,7 +14,6 @@ int main(int argc, char** argv){
     string rutaInstancias = "./Instancias/"; 
     string mode_ = argv[2];
     
-    string it_ = argv[3];
 
     ///////Modo////////
     bool GreedyMode_ = false;
@@ -55,8 +54,8 @@ int main(int argc, char** argv){
     //////////////////////////////////////////////////////////
 
     ///////////// Variables y estructuras SA ////////////////
-    float temperatura_ = 650;
-    float alfa_ = 0.9;
+    float temperatura_ = 100;
+    float alfa_ = 0.99;
     bool flagSAO = false;
     /////////////////////////////////////////////////////////
 
@@ -78,7 +77,7 @@ int main(int argc, char** argv){
         }
         t1exe = clock();
         tiempoEjecucion_ = (double(t1exe-t0exe)/CLOCKS_PER_SEC);
-        oService.escribirArchivo(name, conjuntoSoluciones_, conjuntoDataSoluciones_, tiempoEjecucion_, restricciones_.maxDistance, mode_,it_);
+        oService.escribirArchivo(name, conjuntoSoluciones_, conjuntoDataSoluciones_, tiempoEjecucion_, restricciones_.maxDistance, mode_);
         //oService.showConjuntoSoluciones(conjuntoSoluciones_,conjuntoDataSoluciones_);
         // oService.showDeposito(deposito);
         // oService.showListaNodos(solucion_);
@@ -103,14 +102,14 @@ int main(int argc, char** argv){
         }
         t1exe = clock();
         tiempoEjecucion_ = (double(t1exe-t0exe)/CLOCKS_PER_SEC);
-        oService.escribirArchivo(name, conjuntoSoluciones_, conjuntoDataSoluciones_, tiempoEjecucion_, restricciones_.maxDistance, mode_,it_);
+        oService.escribirArchivo(name, conjuntoSoluciones_, conjuntoDataSoluciones_, tiempoEjecucion_, restricciones_.maxDistance, mode_);
     }else if(SAOPTMode_){
         t0exe = clock();
         while(flag){
             solucion_ = pService.greedy1(solucion_, deposito_, listaClientes_,listaEstaciones_,restricciones_,tiempoSol_, distSol_,combustibleRemanente_);
-            cout<<"++++++++++++++Greedy+++++++++++++"<<endl;
+            //cout<<"++++++++++++++Greedy+++++++++++++"<<endl;
             flag = sService.factible(solucion_,restricciones_,combustibleRemanente_);
-            cout<<"+++++++++++++++++++++++++++++++++"<<endl;
+            //cout<<"+++++++++++++++++++++++++++++++++"<<endl;
             if(flag){
                 solucion_ = sService.simulatedAnnealing(temperatura_,alfa_, solucion_,listaClientes_,
                  restricciones_, distSol_, tiempoSol_,combustibleRemanente_, mode_);
@@ -124,7 +123,7 @@ int main(int argc, char** argv){
         }
         t1exe = clock();
         tiempoEjecucion_ = (double(t1exe-t0exe)/CLOCKS_PER_SEC);
-        oService.escribirArchivo(name, conjuntoSoluciones_, conjuntoDataSoluciones_, tiempoEjecucion_, restricciones_.maxDistance, mode_,it_);
+        oService.escribirArchivo(name, conjuntoSoluciones_, conjuntoDataSoluciones_, tiempoEjecucion_, restricciones_.maxDistance, mode_);
     }else{
         cout<<"Error! Valores válidos para mode: G, SAS, SAO"<<endl;
     }

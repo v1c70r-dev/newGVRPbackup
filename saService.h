@@ -54,9 +54,9 @@ class saService {
                 solValida=false;
             }
 
-            cout<<"tiempoAcumulado "<<tiempoAcumulado<<endl;
-            cout<<"Tiempo max "<<restricciones.maxTime<<endl;
-            cout<<"Combustible Remanente"<< CombustibleRemanente<<endl;
+            // cout<<"tiempoAcumulado "<<tiempoAcumulado<<endl;
+            // cout<<"Tiempo max "<<restricciones.maxTime<<endl;
+            // cout<<"Combustible Remanente"<< CombustibleRemanente<<endl;
             combustRemanente_ = CombustibleRemanente;
             //Si todos los nodos componentes son tipo f => sol no factible 
             //(Esto es por el tipo de greedy que estoy haciendo. En este greedy se buscan solo los clientes alcanzables
@@ -272,6 +272,9 @@ class saService {
             while(pos1 == pos2  || abs(pos1-pos2)<3){
                 pos1 = randInt(1,n);
                 pos2 = randInt(1,n);
+                if(abs(pos1-pos2)<3){//Equivale a hacer swap
+                    return Sc;
+                }
             }
             //Copiar Sc en aux
             for(InstanciaService::Nodo n:Sc){
@@ -367,12 +370,12 @@ class saService {
             listaClientes = pService.setClientesVisitables(Sbest,listaClientes);
 
             solValida = factible(Sbest,restricciones,combustibleRemanente);
-            cout<<"****factible?"<<solValida<<endl;
-            cout<<"****tiempoAcumulado "<<tiempoSolucion<<endl;
-            cout<<"****Tiempo max "<<restricciones.maxTime<<endl;
-            cout<<"****Combustible Remanente"<< combustibleRemanente<<endl;
-            cout<<"solValida "<<solValida<<endl;
-            cout<<"============================"<<endl;
+            //cout<<"****factible?"<<solValida<<endl;
+            //cout<<"****tiempoAcumulado "<<tiempoSolucion<<endl;
+            //cout<<"****Tiempo max "<<restricciones.maxTime<<endl;
+            //cout<<"****Combustible Remanente"<< combustibleRemanente<<endl;
+            //cout<<"solValida "<<solValida<<endl;
+            //cout<<"============================"<<endl;
             
             return Sbest;
         }

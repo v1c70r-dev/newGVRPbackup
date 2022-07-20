@@ -26,4 +26,6 @@ Ejecución:
 * Agregué unos script de bash que permiten generar todas soluciones para su posterior análisis:
     Ejecución: bash loopGvrp.sh
     Ejecución: bash firstLine.sh
+
+* Las carpetas outGreedy, outSAOPT y outSAS deben estar presentes o el programa no guardará los archivos.
     

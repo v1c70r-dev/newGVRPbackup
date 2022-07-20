@@ -1,5 +1,5 @@
 start: main
-	./main $(name) $(mode) $(it)
+	./main $(name) $(mode)
 
 main: main.o 
 	g++ main.o -o main
@@ -32,6 +32,6 @@ cleanSAO:
 	rm *.o outSAOPT/*.out
 
 cleanAll:
-	rm *.o outSAS/*.out outGreedy/*.out outSAOPT/*.out
+	rm *.o outSAS/*.out outGreedy/*.out outSAOPT/*.out Resultados/*.txt
 #target:dependencies
 #	actions
