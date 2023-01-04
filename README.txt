@@ -14,13 +14,13 @@ Ejecución:
                 al ejecutar Simulated annealing + swap sobre las instancias
             mode=SAO
                 Se generan archivos de lectura .out en la carpeta outSA3OPT lo cuales contienen las soluciones
-                al ejecutar Simulated annealing + 3-OPT sobre las instancias
+                al ejecutar Simulated annealing + 2-OPT sobre las instancias
 
     * Para eliminar archivos *.o: make clean
     * Para eliminar archivos *.o y *.out de todas las carpetas: make cleanAll
     * Para eliminar archivos *.o y *.out de la carpeta outGreedy: make cleanG
     * Para eliminar archivos *.o y *.out de la carpeta outSAS: make cleanSAS
-    * Para eliminar archivos *.o y *.out de la carpeta outSA3OPT: make cleanSAO
+    * Para eliminar archivos *.o y *.out de la carpeta outSA2OPT: make cleanSAO
 
 # Observaciones:
 * Agregué unos script de bash que permiten generar todas soluciones para su posterior análisis:
